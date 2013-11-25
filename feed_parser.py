@@ -1,5 +1,6 @@
 from BeautifulSoup import BeautifulStoneSoup
 import urllib2
+import sys
 
 class feed_parser(object):
   def __init__(self, username, boardname="feed"):
@@ -44,7 +45,11 @@ class feed_parser(object):
       -accesses the interwebs for getting the feed, expect and catch those 404s
     """
     print self.url
-    response = urllib2.urlopen(self.url)
+    try:
+      response = urllib2.urlopen(self.url)
+    except:
+      print "Can't access the username+boardname"
+      sys.exit(0)
     self.blob = response.read()
     return self.blob
 

@@ -1,5 +1,4 @@
 BeautifulSoup==3.2.1
 PIL==1.1.7
 appscript==1.0.1
-mechanize==0.2.5
 wsgiref==0.1.2
