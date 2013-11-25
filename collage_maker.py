@@ -7,7 +7,7 @@ from config import *
 class collage_maker(object):
   def __init__(self):
     """
-    initalize with the temppath
+    initalize options from config
     """
     self.collage_width = config['width']
     self.collage_height = config['height']
@@ -28,21 +28,38 @@ class collage_maker(object):
     no_of_columns = (self.collage_width / effective_img_width)
     col_index = [0]*no_of_columns
 
+
+    print "Downloading and creating collage[", #status bar
     for i,each in enumerate(imgsrc_list):
+      print ".", #status bar update
+
       #fetch the image from the list
       img_fn = os.path.join(self.path, str(i)+".jpg")
       urllib.urlretrieve(each, img_fn)
       orig_img = Image.open(img_fn)
+
       #add border to it
       bordered_img = ImageOps.expand(orig_img, border=self.image_border, fill=self.image_border_color)
       width, height = bordered_img.size
       collage.paste(bordered_img, ((i%no_of_columns)*width, col_index[i%no_of_columns]))
       col_index[i%no_of_columns] += height
+
+    print "]"#status bar end
+
+
+    #insert Pintrest logo on the top left conrner
+    pinterest_logo = Image.open(os.path.abspath('./pinterest_logo.png'))
+    collage.paste(pinterest_logo,(0,0), mask=pinterest_logo)
+
+    #output the collage
     collage_fn = os.path.join(self.path, 'collage.jpg')
     collage.save(collage_fn)
     return collage_fn
 
   def delete_images(self):
+    """
+    empty out the temp folder
+    """
     shutil.rmtree(self.path)
     os.makedirs(self.path)
 

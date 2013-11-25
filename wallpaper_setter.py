@@ -1,5 +1,6 @@
 import os
 from importlib import import_module
+import sys
 
 class wallpaper_setter(object):
   def __init__(self, img_path):
@@ -7,17 +8,16 @@ class wallpaper_setter(object):
     # load corresponding plugin
     active_plugin = import_module('wpplugins.%s' % self.env)
 
+    print "detected environment:", self.env
     # set image as wallpaper using plugin
     setimage = active_plugin.set_wallpaper(img_path)
 
     if setimage:
         # success
-        self.log.debug('successfully set wallpaper from %s' % (save_to))
+        print "Success in setting wallpaper"
 
     else:
-        # fail
-        self.log.error('error while setting wallpaper from %s' % (save_to))
-        print 'cannot set wallpaper, check log for details. Exiting'
+        print 'Cannot set wallpaper, exiting'
         sys.exit(1)
 
 
