@@ -1,0 +1,15 @@
+*.pyc
+.Python
+/temp/*
+# Ignore all the virtualenv stuff except the actual packages
+# themselves
+/bin
+/include
+/lib/python*/*
+!/lib/python*/site-packages
+
+# Ignore easyinstall and setuptools
+/lib/python*/site-packages/easy-install.pth
+/lib/python*/site-packages/setuptools.pth
+/lib/python*/site-packages/setuptools-*
+/lib/python*/site-packages/pip-*
