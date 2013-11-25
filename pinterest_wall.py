@@ -37,13 +37,15 @@ def main_flow():
 def main():
    #argument parser
     parser = argparse.ArgumentParser(description="""parses pinterest feed to find out all the pictures from there,it prints the list of qualified image urls""")
-    parser.add_argument('-w','--width', type=int, help='minimum width of the background image', default=1024, required=False)
-    parser.add_argument('-ht','--height', type=int, help='minimum height of the background image', default=768, required=False)
     parser.add_argument('-u','--username', help='username for which the feed is to be accessed', required=True)
-    parser.add_argument('-b','--boardname', help='board name of the user from which the feed is to be accessed', default='feed',required=False)
-    parser.add_argument('-s','--sleeptime', type=int, help='time to sleep in seconds before resetting the wallpaper', default=100, required=False)
-    parser.add_argument('-p','--temppath', help='temporary path that should be used to download images and output the collage to', default='./temp/', required=False)
+
+    parser.add_argument('-w','--width', type=int, help='minimum width of the background image', default=config['width'], required=False)
+    parser.add_argument('-ht','--height', type=int, help='minimum height of the background image', default=config['height'], required=False)
+    parser.add_argument('-b','--boardname', help='board name of the user from which the feed is to be accessed', default=config['boardname'],required=False)
+    parser.add_argument('-s','--sleeptime', type=int, help='time to sleep in seconds before resetting the wallpaper', default=config['sleeptime'], required=False)
+    parser.add_argument('-p','--temppath', help='temporary path that should be used to download images and output the collage to', default=config['temppath'], required=False)
     args = vars(parser.parse_args())
+
     config.update(args)
     main_flow()
 
