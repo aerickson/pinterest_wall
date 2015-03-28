@@ -1,7 +1,7 @@
 import os
 import shutil
 import urllib
-import Image, ImageOps #add border to each image
+from PIL import Image, ImageOps #add border to each image
 from config import *
 
 class collage_maker(object):
